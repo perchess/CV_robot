@@ -37,34 +37,27 @@ float MyRobot::getAngularSpeed() {return this->m_rotationSpeed;}
 
 int MyRobot::draw()
 {
-//    if (ioImage.empty())
-//        return -1;
-//    if ((ioImage.cols != m_area.width) || (ioImage.rows != m_area.height))
-//        return -2;
-
-//    ioImage = this->m_backend.clone();// Очисика фона
     this->setAngle(this->m_angle + this->m_rotationSpeed);
-
-
+  
     cv::Point2f vertices[4];
     vertices[0] = localToGlob(this->m_height / 2, -this->m_width / 2);
     vertices[1] = localToGlob(this->m_height / 2, this->m_width / 2);
     vertices[3] = localToGlob(-this->m_height / 2, -this->m_width / 2);
     vertices[2] = localToGlob(-this->m_height / 2, this->m_width / 2);
     setCenter(((vertices[0].x + vertices[2].x)/2.0f), ((vertices[0].y + vertices[2].y)/2.0f));
-    cv::Mat test = this->m_backend.clone();
+    cv::Mat background = this->m_backend.clone();
     for (int i = 0; i < 4; i++)
     {
-        cv::line(test, vertices[i], vertices[(i+1)%4], cv::Scalar(0,255,0), 2);
+        cv::line(background, vertices[i], vertices[(i+1)%4], cv::Scalar(0,255,0), 2);
         // Задний бампер
         if (i == 0)
-            cv::line(test, vertices[i], vertices[(i+1)%4], cv::Scalar(255,0,0), 2);
+            cv::line(background, vertices[i], vertices[(i+1)%4], cv::Scalar(255,0,0), 2);
         // Передний бампер
         if (i == 2)
-            cv::line(test, vertices[i], vertices[(i+1)%4], cv::Scalar(0,0,255), 2);
+            cv::line(background, vertices[i], vertices[(i+1)%4], cv::Scalar(0,0,255), 2);
     }
-    cv::imshow("robot", test);
-    return 1;
+    cv::imshow("robot", background);
+    return 0;
 }
 
 int MyRobot::setCenter(cv::Mat image)
