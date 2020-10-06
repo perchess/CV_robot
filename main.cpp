@@ -39,10 +39,10 @@ int main(int argc, char *argv[])
             bot1.stop();
             break;
         case 'g':
-            bot1.move_to(100, 110, 0.5f);
-//            bot1.move_to(200, 110);
-//            bot1.move_to(200, 210);
-//            bot1.move_to(100, 210);
+            bot1.move_to(100, 110);
+            bot1.move_to(200, 110);
+            bot1.move_to(200, 210);
+            bot1.move_to(100, 210);
             break;
 //        default:
 //            bot1.move(0, 0);
