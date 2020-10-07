@@ -5,7 +5,8 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    cv::Mat img(cv::Size(300, 300), CV_8UC3,cv::Scalar(255,255,255));
+//    cv::Mat img(cv::Size(300, 300), CV_8UC3,cv::Scalar(255,255,255));
+    cv::Mat img = cv::imread("/home/den/QtProjects/CV_1/CV_robot/background.jpg");
     MyRobot bot1(20, 30, 5, 5);
     bot1.setArea(img);
     bot1.setCenter(100, 100);
